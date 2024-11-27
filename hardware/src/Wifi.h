@@ -20,7 +20,7 @@ class Wifi {
 
        const char* getPass();
 
-       String localIP();
+       const localIP();
 
     private:
        char* wifiSSID;

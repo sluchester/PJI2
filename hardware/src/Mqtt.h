@@ -30,17 +30,17 @@ class Mqtt {
 
        const char* getServer();
 
-       int read();
+      //  int read();
 
-       void poll();
+      //  void poll();
 
-       int available();
+      //  int available();
 
-       String messageTopic();
+      //  String messageTopic();
 
-       void onMessage(void(*)(int));
+      //  void onMessage(void(*)(int));
 
-       string getMessage();
+      //  string getMessage();
 
 
     private:

@@ -15,7 +15,7 @@ Wifi::~Wifi() {
 
 //Este método se conecta na rede Wifi
 void Wifi::connect() {
-    WiFi.enableInsecureWEP(); 
+    esp_wifi_start();
     WiFi.mode(WIFI_STA);
     WiFi.begin(wifiSSID, wifiPass);
 }
@@ -23,6 +23,7 @@ void Wifi::connect() {
 //Este método desconecta da rede Wifi
 void Wifi::disconnect() {
     WiFi.disconnect();
+    esp_wifi_stop();    
 }
 
 //Este método retorna o status da conexão Wifi
@@ -42,5 +43,5 @@ const char* Wifi::getPass() {
 
 //Este método retorna o IP local da rede Wifi
 String Wifi::localIP(){
-    return WiFi.localIP().toString();
+    return WiFi.localIP().toString().c_str();
 }

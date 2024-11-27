@@ -45,18 +45,18 @@ void Mqtt::sendMessage(char topic[], char message[]){
 }
 
 //Este método recebe como parâmetro o tópico e a função de callback
-void Mqtt::receiveMessage(char topic[], void(*callback)(int)){
-    //Chama a função de callback quando receber mensagem no tópico
-    mqttClient.onMessage(callback);
-    //Se inscreve no tópico
-    mqttClient.subscribe(topic);
-}
+// void Mqtt::receiveMessage(char topic[], void(*callback)(int)){
+//     //Chama a função de callback quando receber mensagem no tópico
+//     mqttClient.onMessage(callback);
+//     //Se inscreve no tópico
+//     mqttClient.subscribe(topic);
+// }
 
-//Este garante a conexão com o servidor MQTT
-void Mqtt::poll(){
-    //Monitoramento do estado da conexão
-    mqttClient.poll();
-}
+// //Este garante a conexão com o servidor MQTT
+// void Mqtt::poll(){
+//     //Monitoramento do estado da conexão
+//     mqttClient.poll();
+// }
 
 //Este método retorna o brokerUser, que é o usuário do servidor MQTT
 const char* Mqtt::getUser() {
@@ -73,27 +73,27 @@ const char* Mqtt::getServer() {
     return brokerServer;
 }
 
-//Este método verifica se ainda possui caracteres a serem recebidos
-int Mqtt::available() {
-    return mqttClient.available();
-}
+// //Este método verifica se ainda possui caracteres a serem recebidos
+// int Mqtt::available() {
+//     return mqttClient.available();
+// }
 
-//Este método lê os caracteres recebidos
-int Mqtt::read() {
-    return mqttClient.read();
-}
+// //Este método lê os caracteres recebidos
+// int Mqtt::read() {
+//     return mqttClient.read();
+// }
 
-//Este método retorna o tópico da mensagem recebida
-String Mqtt::messageTopic(){
-    return mqttClient.messageTopic();
-}
+// //Este método retorna o tópico da mensagem recebida
+// String Mqtt::messageTopic(){
+//     return mqttClient.messageTopic();
+// }
 
-//Este método ele chama a função de callback quando a mensagem é recebida
-void Mqtt::onMessage(void(*callback)(int)){
-    mqttClient.onMessage(callback);
-}
+// //Este método ele chama a função de callback quando a mensagem é recebida
+// void Mqtt::onMessage(void(*callback)(int)){
+//     mqttClient.onMessage(callback);
+// }
 
-//Este método retorna a mensagem recebida
-string Mqtt::getMessage() {
-    return message;
-}
+// //Este método retorna a mensagem recebida
+// string Mqtt::getMessage() {
+//     return message;
+// }
