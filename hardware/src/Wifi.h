@@ -2,7 +2,8 @@
 #define _WIFI_H_
 
 #include <cstring>
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
+#include <esp_wifi.h>
 
 class Wifi {
     public:

@@ -2,7 +2,7 @@
 #define _MQTT_H_
 
 #include <cstring>
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 #include <ArduinoMqttClient.h>
 #include <string>
 
