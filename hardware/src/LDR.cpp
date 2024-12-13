@@ -1,16 +1,24 @@
 //Fazer programação para o sensor LDR (Sensor de Luz)
 #include "LDR.h"
+#include <Arduino.h>
 
-const int LDR_PIN = 0; //Verificar qual a porta correta
+class LightSensor {
 
-void setup(){
-    Serial.begin(9600);
-}
+public:
+    // Construtor
+    LDR(int pin);
+    
+    // Método para inicializar a comunicação
+    void begin();
+    
+    // Método para ler o valor do sensor
+    int readValue();
+    
+    // Método para exibir o status de luminosidade
+    void statusLuminosidade(int valorAnalogico);
+    
+private:
+    int sensorPin;
+};
 
-void loop(){
-    int statusLuz = analogRead(LDR_PIN);
-
-    if(statusLuz == HIGH){
-        Serial.println("Apagada");
-    }else Serial.println("Ligada");
-}
+#endif // LIGHT_SENSOR_H

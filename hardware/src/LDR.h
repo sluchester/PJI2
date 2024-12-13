@@ -2,25 +2,36 @@
 #ifndef _LDR_H_
 #define _LDR_H_
 
-#include <Arduino.h>
+#include "LDR.h"
 
+LDR::LightSensor(int pin) {
+    sensorPin = pin;
+}
 
-using namespace std;
+void LDR::begin() {
+    // Inicializa a comunicação serial
+    Serial.begin(9600);
+}
 
-class LDR{
-    public:
-    LDR(int pin);
+int LDR::readValue() {
+    // Lê o valor do sensor no pino analógico
+    return analogRead(sensorPin);
+}
 
-    void setup();
+void LDR::statusLuminosidade(int valorAnalogico) {
+    Serial.print("Analog Value = ");
+    Serial.print(valorAnalogico);   // Valor bruto da leitura analógica
 
-    void loop();
-
-    int getValor(); //Retorna o valor lido do LDR
-
-
-    private:
-  
-
-};
-
-#endif
+    // Definindo as faixas de luminosidade
+    if (analogValue < 40) {
+        Serial.println(" => Apagado");
+    } else if (analogValue < 800) {
+        Serial.println(" => Escurecendo");
+    } else if (analogValue < 2000) {
+        Serial.println(" => Ligado");
+    } else if (analogValue < 3200) {
+        Serial.println(" => Brilhante");
+    } else {
+        Serial.println(" => Muito Brilhante");
+    }
+}
