@@ -2,36 +2,44 @@
 #ifndef _LDR_H_
 #define _LDR_H_
 
-#include "LDR.h"
+#include <Arduino.h>
 
-LDR::LightSensor(int pin) {
-    sensorPin = pin;
-}
+class LDR{
+    public:
+        // Construtor
+        LDR(int pin = 15);
 
-void LDR::begin() {
-    // Inicializa a comunicação serial
-    Serial.begin(9600);
-}
+        // Valor do Sensor
+        void valorSensor();
+        
+        //Mede e armazena um valor base para comparação.
+        void valorBaseSensor();
 
-int LDR::readValue() {
-    // Lê o valor do sensor no pino analógico
-    return analogRead(sensorPin);
-}
+        int getCorrete();
 
-void LDR::statusLuminosidade(int valorAnalogico) {
-    Serial.print("Analog Value = ");
-    Serial.print(valorAnalogico);   // Valor bruto da leitura analógica
+        //Retorna o valor base armazenado
+        int getrValorBase();
 
-    // Definindo as faixas de luminosidade
-    if (analogValue < 40) {
-        Serial.println(" => Apagado");
-    } else if (analogValue < 800) {
-        Serial.println(" => Escurecendo");
-    } else if (analogValue < 2000) {
-        Serial.println(" => Ligado");
-    } else if (analogValue < 3200) {
-        Serial.println(" => Brilhante");
-    } else {
-        Serial.println(" => Muito Brilhante");
-    }
-}
+        //Determina o status do LDR com base em um limite.
+        bool getStatus();
+
+        ~LDR() {};
+
+
+    private:
+        //Faixa de valores para o LDR
+        int VMax = 4095;
+        int VMin = 2500;
+
+        // int PorcentagemMin = 0;
+        // int PorcentagemMax = 100;
+        int pin = 0;
+
+        //Valor base para comparação
+        int baseValor = 0;
+
+        //Valor atual do sensor
+        int currenteValor = 0;
+};
+
+#endif
