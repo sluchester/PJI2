@@ -42,6 +42,8 @@ const char* Wifi::getPass() {
 }
 
 //Este método retorna o IP local da rede Wifi
-String Wifi::localIP(){
-    return WiFi.localIP().toString().c_str();
+const char* Wifi::local(){
+    //return WiFi.localIP().toString().c_str();
+    ip = WiFi.localIP().toString();  // Armazena o IP na variável de instância
+    return ip.c_str();  // Retorna um ponteiro seguro
 }

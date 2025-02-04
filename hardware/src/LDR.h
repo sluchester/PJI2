@@ -1,45 +1,37 @@
-//Fazer programação para o sensor LDR (Sensor de Luz)
-#ifndef _LDR_H_
-#define _LDR_H_
+#ifndef __LDR__
+#define __LDR__
 
 #include <Arduino.h>
+#include <Adafruit_ADS1X15.h>
+#include <Adafruit_Sensor.h>
+#include <ADS1X15.h>
+#include <Adafruit_I2CDevice.h>
+#include "Adafruit_ADS1X15.h" 
 
-class LDR{
+class LDR {
     public:
-        // Construtor
-        LDR(int pin = 15);
+        LDR(int enderecoADS = 0x49);   // Definindo a constante para o pino D12
 
-        // Valor do Sensor
-        void valorSensor();
-        
-        //Mede e armazena um valor base para comparação.
-        void valorBaseSensor();
+        float medidaAnalog();     // valor analógico
 
-        int getCorrete();
+        float medidaTensao(int16_t adcValue, float voltageRange);     // valor tensão
 
-        //Retorna o valor base armazenado
-        int getrValorBase();
+        bool getStatus();       // valor atual
 
-        //Determina o status do LDR com base em um limite.
-        bool getStatus();
+        void calibragem();      // só faz a comparação
 
-        ~LDR() {};
+        int obtemValorBase();
 
+        bool begin();
+
+        void configure();
 
     private:
-        //Faixa de valores para o LDR
-        int VMax = 4095;
-        int VMin = 2500;
+        float valorAnalog = 0;
+        float valorTensao = 0;
+        float valorBase = 0;
+        ADS1115 ADS;
 
-        // int PorcentagemMin = 0;
-        // int PorcentagemMax = 100;
-        int pin = 0;
-
-        //Valor base para comparação
-        int baseValor = 0;
-
-        //Valor atual do sensor
-        int currenteValor = 0;
 };
 
 #endif

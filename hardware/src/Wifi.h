@@ -4,6 +4,7 @@
 #include <cstring>
 #include <WiFi.h>
 #include <esp_wifi.h>
+#include <string>
 
 class Wifi {
     public:
@@ -21,11 +22,12 @@ class Wifi {
 
        const char* getPass();
 
-       const localIP();
+       const char* local();
 
     private:
        char* wifiSSID;
        char* wifiPass;
+       String ip;
 }; 
 
 #endif

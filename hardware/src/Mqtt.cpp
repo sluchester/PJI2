@@ -1,4 +1,5 @@
 #include "Mqtt.h"
+ #include <ArduinoMqttClient.h>
 
 using namespace std;
 

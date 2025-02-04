@@ -1,33 +1,42 @@
-//Fazer programação para o sensor LDR (Sensor de Luz)
 #include "LDR.h"
 
-    //Construtor, inicializa o pino do sensor
-    LDR::LDR(int pin){
-        LDR::pin = pin;
-    }
+LDR::LDR(int enderecoADS) 
+    : ADS(enderecoADS) {
+}
 
-    //Mede e armazena um valor base para comparação
-    void LDR::valorSensor(){
-        currenteValor = analogRead(LDR::pin);
-    }
+bool LDR::begin(){
+    return ADS.begin();
+}
 
-    //Mede o valor atual com valorSensor() 
-    //e define-o como o valor base (baseValue), para uso como referência em comparações futuras.
-    void valorBaseSensor(){
-        valorSensor();
-        baseValor = currenteValor;
-    }
+void LDR::configure(){
+    ADS.setDataRate(0);  // Taxa de dados padrão
 
-    int LDR::getCorrente(){
-        return currenteValor;
-    }
+    // Ajuste do ganho interno p/ o maior ganho
+    ADS.setGain(1);
+    // ou ads.setGain(GAIN_ONE); 
+}
 
-    int LDR::getValorBase(){
-        return baseValor;
-    }
+float LDR::medidaAnalog(){
+    // leitura do valor analógico(entrada) das portas
+    valorAnalog = ADS.readADC(3);
+    return valorAnalog;	// pino analógico 3
+}
 
-    //Determina o status do LDR com base em um limite.
-    bool LDR::getStatus(){
-        valorSensor();
-        return currentValue < baseValue + 1000;
-    }
+float LDR::medidaTensao(int16_t adcValue, float voltageRange){
+    // voltageRange é a amplitude máxima da tensão que o ADC pode medir
+    valorTensao = (adcValue / 32767.0) * voltageRange;
+    return valorTensao;
+}
+
+bool LDR::getStatus(){
+    // qual a margem de erro que devo inserir? Fazer medidas em casa!
+    return valorAnalog > valorBase - 1000;
+}
+
+void LDR::calibragem(){
+    valorBase = medidaAnalog();
+}
+
+int LDR::obtemValorBase(){
+    return valorBase;
+}
