@@ -1,3 +1,7 @@
+#include <Arduino.h>
+#include <math.h>
+#include "AC.h"
+
 float tensao = 0;
 float corrente = 0;
 float tensaoFinal = 0;
@@ -6,6 +10,8 @@ int correnteInst[1000];
 int tensaoInst[1000];
 long contaFinal = 0;
 long tempoEnvio = 0;
+
+AC ac(4);
 
 void Task1code( void * pvParameters ) {
   for (;;) {
@@ -16,8 +22,8 @@ void Task1code( void * pvParameters ) {
 
     while (micros() - ti < 16667)
     {
-      tensaoInst[conta] = analogRead(36);
-      correnteInst[conta] = analogRead(39);
+      tensaoInst[conta] = ac.temperatura();
+      correnteInst[conta] = ac.umidade();
 
       acumTensao = acumTensao + tensaoInst[conta];
       acumCorrente = acumCorrente + correnteInst[conta];

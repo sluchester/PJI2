@@ -11,16 +11,23 @@ void connect_wifi(void)
     delay(1000);
     Serial.print(WiFi.status());
     Serial.print(".");
+      if (retry_count == 10) {
+        ESP.restart(); // Reinicia o dispositivo após várias tentativas
+        Serial.print("cant connect to wifi");
+        delay(10000);
+        Serial.print("should leave...");
+        delay(10000);
+    }
     retry_count++;
   }
 
-  if (retry_count == 10) {
+  /*if (retry_count == 10) {
     //ESP.restart(); // Reinicia o dispositivo após várias tentativas
     Serial.print("cant connect to wifi");
     delay(10000);
     Serial.print("should leave...");
     delay(10000);
-  }
+  }*/
 
   Serial.println("");
   Serial.println("WiFi connected");
@@ -44,7 +51,7 @@ void enviarMedicao()
   Serial.println("Making a request");
   Serial.println(url);
 
-  http.begin(url.c_str()); //Specify the URL and certificate
+  http.begin(url.c_str()); //Specify the URL and certific22Plusate
   http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
   int httpCode = http.GET();
   Serial.println(httpCode);

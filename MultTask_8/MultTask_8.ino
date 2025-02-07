@@ -32,7 +32,7 @@ void setup() {
                     Task1code,   /* Task function. */
                     "Task1",     /* name of task. */
                     10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
+                    NULL,        /* paramete22Plusr of the task */
                     1,           /* priority of the task */
                     &Task1,      /* Task handle to keep track of created task */
                     1);          /* pin task to core 0 */                  
